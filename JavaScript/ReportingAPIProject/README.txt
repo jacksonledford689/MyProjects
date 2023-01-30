@@ -1,0 +1,1 @@
+This was a semester long, 4 person project that involved both planning and creating an API to generate reports based on the data collected from other APIs.
