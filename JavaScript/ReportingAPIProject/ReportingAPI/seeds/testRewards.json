@@ -1,0 +1,23 @@
+[
+    {
+        "date": "2016-07-06",
+        "rewardList": [
+        {
+            "userid": 434,
+            "rewardPoints": 100
+        },
+        {
+            "userid": 573,
+            "rewardPoints": 96512
+        },
+        {
+            "userid": 434,
+            "rewardPoints": 101
+        },
+        {
+            "userid": 943,
+            "rewardPoints": 64061
+        }
+        ]
+    }
+]

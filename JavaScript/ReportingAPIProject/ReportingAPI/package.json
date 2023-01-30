@@ -1,0 +1,19 @@
+{
+  "name": "reportingapi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.3",
+    "joi": "^17.6.0"
+  },
+  "engines": {
+    "node": "16.13.1"
+  }
+}

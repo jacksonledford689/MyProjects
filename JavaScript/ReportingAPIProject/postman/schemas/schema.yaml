@@ -1,0 +1,1051 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: reporting API
+  description: This API handles all requests for reports for different business aspects, such as sales, restaurants, drivers, etc. It allows for general summary reports or some individualized reports for restaurants and drivers.
+
+servers:
+  - url: https://tigerchow.com
+
+security:
+  - BasicAuth: []
+
+paths:
+  /reports/sales:
+    get:
+      description: Retrieve a sales report which includes information such as total profit, total revenue, number of sales, etc. This can be filtered by a timeframe or a start date and end date.
+      parameters:
+        - $ref: "#/components/parameters/timeframe"
+        - $ref: "#/components/parameters/startdate"
+        - $ref: "#/components/parameters/enddate"
+      responses:
+        '200':
+          description: Successfully return a sales report
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/salesReport'
+
+        default:
+          $ref: '#/components/responses/Error'
+
+    # post:
+    #   description: let other services post raw sales data in batches
+
+    #   requestBody:
+    #     $ref: '#/components/requestBodies/rawDataBody'
+
+    #   responses:
+    #     '200':
+    #       $ref: '#/components/responses/200SuccessMessage'
+
+    #     default:
+    #       $ref: '#/components/responses/Error'
+
+  /reports/abandoned-carts:
+    get:
+      description: Retrieve an abandoned carts report for a user which includes information such as total count(of abandoned carts), id of the restaurant with the most abandoned carts, a list of commonly abandoned items, etc. This can be filtered by a timeframe or a start date and end date.
+      parameters:
+        - $ref: "#/components/parameters/timeframe"
+        - $ref: "#/components/parameters/startdate"
+        - $ref: "#/components/parameters/enddate"
+
+      responses:
+        '200':
+          description: Successfully return a sales report for a user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/abandonedCartReport"
+        default:
+          $ref: '#/components/responses/Error'
+
+    post:
+      description: let other services post raw sales data in batches
+      requestBody:
+        $ref: '#/components/requestBodies/rawAbandonedCartData'
+
+      responses:
+        '200':
+          $ref: '#/components/responses/200SuccessMessage'
+        default:
+          $ref: '#/components/responses/Error'
+
+
+  /reports/abandoned-carts/users/{userid}:
+    get:
+      description: Retrieve an abandoned carts report for a user which includes all previous information, but narrowed down to a specific user. This can be filtered by a timeframe, a start date and end date, and/or a user id.
+      parameters:
+        - $ref: "#/components/parameters/userid"
+        - $ref: "#/components/parameters/timeframe"
+        - $ref: "#/components/parameters/startdate"
+        - $ref: "#/components/parameters/enddate"
+
+      responses:
+        '200':
+          description: Successfully return a sales report for a restaurant
+          content:
+            application/json::
+              schema:
+                $ref: "#/components/schemas/abandonedCartReport"
+
+        default:
+          $ref: '#/components/responses/Error'
+
+  /reports/abandoned-carts/restaurants/{restaurantid}:
+    get:
+      description: Retrieve an abandoned carts report for a restaurant which includes all previous information, but narrowed down to a specifc restaurant. This can be filtered by a timeframe, a start date and end date, and/or a restaurant id.
+      parameters:
+        - $ref: "#/components/parameters/restaurantid"
+        - $ref: "#/components/parameters/timeframe"
+        - $ref: "#/components/parameters/startdate"
+        - $ref: "#/components/parameters/enddate"
+
+      responses:
+        '200':
+          description: Successfully return a sales report for a restaurant
+          content:
+            application/json::
+              schema:
+                $ref: "#/components/schemas/abandonedCartReport"
+        default:
+          $ref: '#/components/responses/Error'
+
+  /reports/transactions:
+    get:
+      description: Retrieve a transaction report which includes information such as the amount of money in pending/posted/declined transactions along with the actual number of pending/posted transactions. This can be filtered by a timeframe or a start date and end date.
+      parameters:
+        - $ref: "#/components/parameters/timeframe"
+        - $ref: "#/components/parameters/startdate"
+        - $ref: "#/components/parameters/enddate"
+      responses:
+        '200':
+          description: Successfully return a transaction report
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/transactionDataReport'
+
+        default:
+          $ref: '#/components/responses/Error'
+
+    post:
+      description: Let other services post raw transaction data in batches
+
+      requestBody:
+        $ref: '#/components/requestBodies/rawTransactionData'
+
+      responses:
+        '200':
+          $ref: '#/components/responses/200SuccessMessage'
+
+        default:
+          $ref: '#/components/responses/Error'
+
+  /reports/transactions/users/{userid}:
+    get:
+      description: Retrieve a transaction report for a user which includes all previous information, but narrowed down to a specific user. This can be filtered by a timeframe, a start date and end date, and/or a user id.
+      parameters:
+        - $ref: "#/components/parameters/timeframe"
+        - $ref: "#/components/parameters/startdate"
+        - $ref: "#/components/parameters/enddate"
+        - $ref: "#/components/parameters/userid"
+      responses:
+        '200':
+          description: Successfully return a transaction report for user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/transactionDataReport'
+
+        default:
+          $ref: '#/components/responses/Error'
+
+  /reports/transactions/restaurants/{restaurantid}:
+    get:
+      description: Retrieve a transaction report for a user which includes all previous information, but narrowed down to a specific user. This can be filtered by a timeframe, a start date and end date, and/or a restaurant id.
+      parameters:
+        - $ref: "#/components/parameters/timeframe"
+        - $ref: "#/components/parameters/startdate"
+        - $ref: "#/components/parameters/enddate"
+        - $ref: "#/components/parameters/restaurantid"
+      responses:
+        '200':
+          description: Successfully return a transaction report for restaurant
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/transactionDataReport'
+
+        default:
+          $ref: '#/components/responses/Error'
+
+
+  /reports/drivers:
+    get:
+      description: Retrieve a driver activity report which includes total deliveries completed, total deliveries canceled, total tips, etc. This can be filtered by a timeframe or a start date and end date.
+      parameters:
+        - $ref: "#/components/parameters/timeframe"
+        - $ref: "#/components/parameters/startdate"
+        - $ref: "#/components/parameters/enddate"
+      responses:
+        '200':
+          description: Successfully return driver report
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/driverActivityReport"
+        default:
+          $ref: '#/components/responses/Error'
+
+    post:
+      description: Let other services post raw driver data in batches
+
+      requestBody:
+        $ref: '#/components/requestBodies/rawDriverData'
+
+      responses:
+        '200':
+          $ref: '#/components/responses/200SuccessMessage'
+
+        default:
+          $ref: '#/components/responses/Error'
+
+  /reports/drivers/{driverid}:
+    get:
+      description: Retrieve a driver activity report which includes all previous information, but narrowed down to a specific driver. This can be filtered by a timeframe, a start date and end date, and/or a driver id.
+      parameters:
+        - $ref: "#/components/parameters/driverid"
+        - $ref: "#/components/parameters/startdate"
+        - $ref: "#/components/parameters/enddate"
+        - $ref: "#/components/parameters/timeframe"
+      responses:
+        '200':
+          description: Successfully return driver report
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/driverActivityReport"
+        default:
+          $ref: '#/components/responses/Error'
+
+  /reports/drivers/top:
+    get:
+      description: Retrieve a driver activity report which includes all previous information, but narrowed down to the top driver of a given metric. This can be filtered by a timeframe, a start date and end date, and/or a metric. Given no metric, shows top driver for each metric.
+      parameters:
+        - $ref: "#/components/parameters/timeframe"
+        - $ref: "#/components/parameters/startdate"
+        - $ref: "#/components/parameters/enddate"
+        - $ref: "#/components/parameters/metric"
+      responses:
+        '200':
+          description: Successfully return driver report for the top driver
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/driverActivityReport"
+        default:
+          $ref: '#/components/responses/Error'
+
+
+
+  /reports/customer-service:
+    get:
+      description: Retrieve a report on customer service tickets which includes total number of resolved/unresolved tickets, ticket to order ratio, restaurants/drivers with the most/least tickets, etc. This can be filtered by a timeframe or a start date and end date.
+      parameters:
+        - $ref: "#/components/parameters/timeframe"
+        - $ref: "#/components/parameters/startdate"
+        - $ref: "#/components/parameters/enddate"
+      responses:
+        '200':
+          description: Successfully return a customer service report
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customerServiceReport'
+
+        default:
+          $ref: '#/components/responses/Error'
+
+    post:
+      description: let other services post raw sales data in batches
+
+      requestBody:
+        $ref: '#/components/requestBodies/rawCustomerServiceData'
+
+      responses:
+        '200':
+          $ref: '#/components/responses/200SuccessMessage'
+
+        default:
+          $ref: '#/components/responses/Error'
+
+  /reports/customer-service/users/{userid}:
+    get:
+      description: Retrieve a report on customer service tickets which includes all previous information, but narrowed down to a specific user. This can be filtered by a timeframe, a start date and end date, and/or a user id.
+      parameters:
+        - $ref: "#/components/parameters/userid"
+        - $ref: "#/components/parameters/timeframe"
+        - $ref: '#/components/parameters/startdate'
+        - $ref: '#/components/parameters/enddate'
+      responses:
+        '200':
+          description: Successfully return a customer service report for a specific user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customerServiceReport'
+
+        default:
+          $ref: '#/components/responses/Error'
+
+  /reports/customer-service/restaurants/{restaurantid}:
+    get:
+      description: Retrieve a report on customer service tickets which includes all previous information, but narrowed down to a specific restaurant. This can be filtered by a timeframe, a start date and end date, and/or a restaurant id.
+      parameters:
+        - $ref: '#/components/parameters/restaurantid'
+        - $ref: "#/components/parameters/timeframe"
+        - $ref: '#/components/parameters/startdate'
+        - $ref: '#/components/parameters/enddate'
+
+      responses:
+        '200':
+          description: Successfully return a customer service report for a specific restaurant
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customerServiceReport'
+
+        default:
+          $ref: '#/components/responses/Error'
+
+  /reports/customer-service/driver/{driverid}:
+    get:
+      description: Retrieve a report on customer service tickets which includes all previous information, but narrowed down to a specific driver. This can be filtered by a timeframe, a start date and end date, and/or a driver id.
+      parameters:
+        - $ref: '#/components/parameters/driverid'
+        - $ref: "#/components/parameters/timeframe"
+        - $ref: '#/components/parameters/startdate'
+        - $ref: '#/components/parameters/enddate'
+
+      responses:
+        '200':
+          description: Successfully return a customer service report for a specific driver
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customerServiceReport'
+
+        default:
+          $ref: '#/components/responses/Error'
+
+
+
+
+  /reports/restaurants:
+    get:
+      description: Retrieve a restaurant activity report which includes number of order, average time before pickup, profits, etc. This can be filtered by a timeframe or a start date and end date.
+      parameters:
+        - $ref: "#/components/parameters/timeframe"
+        - $ref: "#/components/parameters/startdate"
+        - $ref: "#/components/parameters/enddate"
+      responses:
+        '200':
+          description: Successfully return a restaurant activity report
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restaurantActivityReport'
+
+        default:
+          $ref: '#/components/responses/Error'
+
+    post:
+      description: Let other services post raw restaurant activity data in batches
+
+      requestBody:
+        $ref: '#/components/requestBodies/rawRestaurantData'
+
+      responses:
+        '200':
+          $ref: '#/components/responses/200SuccessMessage'
+
+        default:
+          $ref: '#/components/responses/Error'
+
+  /reports/restaurants/{restaurantid}:
+    get:
+      description: Retrieve a restaurant activity report which includes all previous information, but narrowed down to a specific restaurant. This can be filtered by a timeframe, a start date and end date, and/or a restaurant id.
+      parameters:
+        - $ref: "#/components/parameters/timeframe"
+        - $ref: "#/components/parameters/startdate"
+        - $ref: "#/components/parameters/enddate"
+        - $ref: "#/components/parameters/restaurantid"
+      responses:
+        '200':
+          description: Successfully return a restaurant activity report
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restaurantActivityReport'
+
+        default:
+          $ref: '#/components/responses/Error'
+
+  /reports/restaurants/top:
+    get:
+      description: Retrieve restaurant activity reports which inclueds all previous information, but narrowed down to the top restaurant of a given metric. This can be filtered by a timeframe, a start date and end date, and/or a metric. Given no metric, shows top restaurant for each metric.
+      parameters:
+        - $ref: "#/components/parameters/timeframe"
+        - $ref: "#/components/parameters/startdate"
+        - $ref: "#/components/parameters/enddate"
+        - $ref: "#/components/parameters/metric"
+      responses:
+        '200':
+          description: Successfully return a restaurant activity report
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restaurantActivityReport'
+
+        default:
+          $ref: '#/components/responses/Error'
+
+
+
+  /reports/rewards:
+    post:
+      description: let other services post raw user reward data in batches
+
+      requestBody:
+        $ref: '#/components/requestBodies/rawRewardData'
+
+      responses:
+        '200':
+          $ref: '#/components/responses/200SuccessMessage'
+
+        default:
+          $ref: '#/components/responses/Error'
+
+  /reports/rewards/users/{userid}:
+    get:
+      description: Retrieve a user reward report which includes total sales and the user id. This is filtered by a user id.
+      parameters:
+        - $ref: "#/components/parameters/userid"
+      responses:
+        '200':
+          description: Successfully return reward report
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/userRewardDataReport"
+        default:
+          $ref: '#/components/responses/Error'
+
+
+
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+
+  schemas:
+    salesReport:
+      description: sales report representation
+      type: object
+      properties:
+        startDate:
+          description: The start date for a report's timeframe
+          type: string
+          example: "03-06-2022"
+        endDate:
+          description: The end date for a report's timeframe
+          type: string
+          example: "03-07-2022"
+        totalProfit:
+          description: The total amount of profits, includes both restaurant profits, driver profits, and TigerChow profits
+          type: number
+          example: 12345678.9
+        totalRestaurantProfit:
+          description: The total amount of profits that went to restaurants
+          type: number
+          example: 12345678.9
+        totalDriverProfit:
+          description: The total amount of profits that went to drivers
+          type: number
+          example: 12345678.9
+        revenue:
+          description: The total amount of revenue going to TigerChow
+          type: number
+          example: 12345678.9
+        salesCount:
+          description: The total number of sales made in that time range
+          type: integer
+          example: 123456789
+        newAccountCount:
+          description: The total number of new accounts made in this time period
+          type: integer
+          example: 123456789
+
+    abandonedCartReport:
+      description: Abandoned cart report representation
+      type: object
+      properties:
+        startDate:
+          description: The start date of the report
+          type: string
+          example: "03-06-2022"
+        endDate:
+          description: The end date of the report
+          type: string
+          example: "03-07-2022"
+        cartCount:
+          type: integer
+          example: 12345
+          description: Number of abandoned carts
+        restaurantID:
+          type: integer
+          example: 5
+          description: Restaurant ID is shown if viewing abandoned cart report for a specific restaurant
+        userID:
+          type: integer
+          example: 99
+          description: User ID is shown if viewing abandoned cart report for a specific user
+        cartValueTotal:
+          type: number
+          example: 123.34
+          description: The total value in the cart in dollars
+        restLeastAbandCarts:
+          type: integer
+          example: 5
+          description: Return the ID of the restaurant with the least abandoned carts
+        restMostAbandCarts:
+          type: integer
+          example: 9
+          description: Return the ID of the restaurant with the most abandoned carts
+        commonAbandonedItems:
+          type: array
+          items:
+            type: integer
+          uniqueItems: true
+          example: [1, 2, 3, 4]
+          description: Return the most common items that are in abandoned carts in an array by the items' ID
+
+    driverActivityReport:
+      description: Driver activity report representation
+      properties:
+        startDate:
+          description: The start date of the report
+          type: string
+          example: "01-01-2022"
+        endDate:
+          description: The end date of the report
+          type: string
+          example: "12-31-2023"
+        countDeliveriesComplete:
+          description: The total number of deliveries
+          type: integer
+          example: 789
+        countDeliveriesCancelled:
+          description: The total number of deliveries cancelled
+          type: integer
+          example: 94
+        tipTotal:
+          description: Total tips
+          type: number
+          example: 8.76
+        driverID:
+          type: integer
+          example: 87
+          description: Driver ID is shown if viewing driver activity report for a specific driver
+        averageDeliveryRating:
+          description: Average rating for all delivery
+          type: number
+          example: 3.4
+        averageDeliveryTime:
+          type: number
+          example: 15.7
+          description: Return the average delivery time in minutes
+
+    transactionDataReport:
+      description: Transaction data report representation
+      properties:
+        startDate:
+          description: The start date of the report
+          type: string
+          example: "01-01-2022"
+        endDate:
+          description: The end date of the report
+          type: string
+          example: "12-12-2022"
+        totalAmountPending:
+          type: number
+          example: 7823.42
+          description: Return the total amount of money that are pending payments in US dollars
+        totalAmountDeclined:
+          type: number
+          example: 9232423.40
+          description: Return the total payment amount that was declined in US dollars
+        totalAmountPosted:
+          type: number
+          example: 89982983
+          description: Return the total amount of money that went through in US dollars
+        pendingPaymentCount:
+          description: The number of pending payments
+          type: integer
+          example: 98
+        postedPaymentCount:
+          description: The number of posted payments
+          type: integer
+          example: 67
+
+    userRewardDataReport:
+      description: User reward data representation
+      properties:
+        userID:
+          description: ID for user
+          type: integer
+          example: 9
+        totalSales:
+          description: total sales 
+          type: number
+          example: 982842.53
+
+    customerServiceReport:
+      description: Customer service report representation
+      properties:
+        startDate:
+          description: The start date for a report's timeframe
+          type: string
+          example: "01-01-2022"
+        endDate:
+          description: The end date for a report's timeframe
+          type: string
+          example: "12-12-2022"
+        totalResolvedTickets:
+          description: The total number of resolved tickets
+          type: integer
+          example: 8923
+        totalUnresolvedTickets:
+          description: The total number of unresolved tickets
+          type: integer
+          example: 283
+        restaurantsMostTickets:
+          type: array
+          items:
+            type: integer
+          maxItems: 5
+          uniqueItems: true
+          example: [1, 2, 3, 4, 5]
+          description: Return the IDs of the top five restaurants with the most customer support tickets
+        restaurantsLeastTickets:
+          type: array
+          items:
+            type: integer
+          maxItems: 5
+          uniqueItems: true
+          example: [1, 2, 3, 4, 5]
+          description: Return the IDs of the top five restaurants with the least customer support tickets
+        totalTicketsOrderRatio:
+          type: number
+          example: 0.01
+          description: Return the total customer support tickets to order ratio
+        driverMostTickets:
+          type: integer
+          example: 9
+          description: Return the ID of the driver with the most customer support tickets
+        driverLeastTickets:
+          type: integer
+          example: 99
+          description: Return the ID of the driver with the least customer support tickets
+        highestOpenTicketRestaurant:
+          type: integer
+          example: 23
+          description: Return the ID of the restaurant with the highest open customer support ticket count
+
+    restaurantActivityReport:
+      description: Restaurant activity report representation
+      properties:
+        startDate:
+          description: The start date of the report
+          type: string
+          example: "01-01-2022"
+        endDate:
+          description: The end date of the report
+          type: string
+          example: "12-12-2022"
+        numOrders:
+          description: The total number of orders
+          type: integer
+          example: 9283928
+        averageTimeToPickup: 
+          type: number
+          example: 17.23
+          description: Return the average time that customers takes to come pickup their food at a restaurant in minutes
+        profits:
+          description: Total profits
+          type: number
+          example: 29839283
+        highestOrderedItems:
+          type: array
+          items:
+            type: integer
+            description: ID of item
+          maxItems: 5
+          uniqueItems: true
+          example: [1, 2, 3, 4, 5]
+          description: Return the top five items that are frequently ordered in an array of the item's id
+        restaurantID:
+          type: integer
+          example: 82
+          description: The restaurant id is shown if view restaurant activity report for a specific restaurant
+        averageRating:
+          type: number
+          example: 3.2
+          description: Return the average rating of all the restaurants
+        totalSales:
+          type: integer
+          example: 1231231
+          description: Return the total sales of all the restaurants (percentage of total sales of a specific restaurant to total sales is shown if viewing restaurant activity report for a spciefic restaurant)
+
+  parameters:
+    metric:
+      name: metric
+      in: query
+      description: Set the metric to sort report by (profit, number of orders, tips)
+      schema:
+        type: string
+        example: "profit"
+
+    timeframe:
+      name: timeframe
+      in: query
+      description: set the timeframe for the report (day, week, month, year)
+      schema:
+        type: string
+        example: "day"
+
+    startdate:
+      name: startdate
+      in: query
+      description: set the start date when the report begins
+      schema:
+        type: string
+        example: "01-01-2022"
+
+    enddate:
+      name: enddate
+      in: query
+      description: set the end date when the report ends
+      schema:
+        type: string
+        example: "12-31-2022"
+
+    userid:
+      name: userid
+      in: path
+      description: The user ID
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+
+    restaurantid:
+      name: restaurantid
+      in: path
+      description: The restaurant ID
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+
+    driverid:
+      name: driverid
+      in: path
+      description: The driver ID
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+
+  requestBodies:
+    rawDataBody:
+      description: A JSON object containing raw data
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+
+    rawAbandonedCartData:
+      description: A JSON object containing raw data for a day's abandoned carts
+      required: true
+      content:
+        application/json:
+          schema:
+            type: array
+            description: An array of abandoned carts information objects
+            items:
+              type: object
+              description: an abandoned cart object
+              properties:
+                date:
+                  description: The date of the data
+                  type: string
+                  example: '01-01-2022'
+                restaurantid:
+                  description: The restaurant id
+                  type: integer
+                  example: 9
+                userid:
+                  description: The user id
+                  type: integer
+                  example: 11
+                cartItems:
+                  type: array
+                  description: an array of cart items that are in the cart
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        description: The name of the item
+                        type: string
+                        example: 'eggdrop soup'
+                      price:
+                        description: The price of the item
+                        type: number
+                        example: 3.99
+
+    rawTransactionData:
+      description: A JSON object containing raw data for a day's transactions
+      required: true
+      content:
+        application/json:
+          schema:
+            type: array
+            description: An array of transaction information objects
+            items:
+              type: object
+              description: a transaction object
+              properties:
+                date:
+                  description: The date of the data
+                  type: string
+                  example: '01-01-2022'
+                restaurantid:
+                  description: The restaurant id
+                  type: integer
+                  example: 85
+                transactionItems:
+                  type: array
+                  description: an array of transaction by id that are in the cart
+                  items:
+                    type: object
+                    properties:
+                      totalPrice:
+                        description: The total price
+                        type: number
+                        example: 178.9
+                      status:
+                        description: The status of the transaction
+                        type: string
+                        example: 'declined'
+                      paymentPlatform:
+                        description: The payment platform used
+                        type: string
+                        example: 'Visa'
+                      userid:
+                        description: the user id
+                        type: integer
+                        example: 982
+
+    rawDriverData:
+      description: A JSON object containing raw data for drivers for a day
+      required: true
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: object
+              description: a driver information object
+              properties:
+                date:
+                  description: The date of the data
+                  type: string
+                  example: '01-01-2022'
+                driverid:
+                  description: The driver id
+                  type: integer
+                  example: 23
+                deliveries:
+                  type: array
+                  description: an array of delivery objects that the driver delivered that day
+                  items:
+                    type: object
+                    properties:
+                      restaurantid:
+                        description: The restaurant id
+                        type: integer
+                        example: 85
+                      isCompleted:
+                        description: determines if delivery is completed or canceled. True if completed, false otherwise.
+                        type: boolean
+                        example: true
+                      transactionid:
+                        description: The transaction id
+                        type: integer
+                        example: 923
+                      tipAmount:
+                        description: The tip amount
+                        type: number
+                        example: 9.01
+                      rating:
+                        description: The rating for the delivery
+                        type: number
+                        example: 4.6
+                      deliveryTime:
+                        description: delivery time in minutes in decimal format
+                        type: number
+                        example: 7.89
+
+    rawCustomerServiceData:
+      description: A JSON object containing raw data for cusomter service tickets for a day
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              date:
+                description: The date of the data
+                type: string
+                example: '01-01-2020'
+              ticketItems:
+                description: An array of ticket information objects
+                type: array
+                items:
+                  type: object
+                  description: Ticket information object
+                  properties:
+                    ticketid:
+                      description: The ticket id
+                      type: integer
+                      example: 2132
+                    userid:
+                      description: The user id
+                      type: integer
+                      example: 23
+                    restaurantid:
+                      description: The restaurant id. if ticket is not for restaurant, restaurantid is -1
+                      type: integer
+                      example: 128
+                    driverid:
+                      description: The driver id. if ticket is not for driver, driverid is -1
+                      type: integer
+                      example: 329
+                    status:
+                      description: The status of the ticket
+                      type: string
+                      example: 'resolved'
+
+    rawRestaurantData:
+      description: A JSON object containing raw data for restaurant information for a day
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              date:
+                description: The date that the data was generated
+                type: string
+                example: '01-01-2020'
+              restaurantList:
+                description: An array of restaurant information objects
+                type: array
+                items:
+                  type: object
+                  description: restaurant information object
+                  properties:
+                    averagePickupTime:
+                      description: average pickup time in minutes
+                      type: number
+                      example: 16.50
+                    numberOfOrders:
+                      description: Total number of orders
+                      type: integer
+                      example: 1239
+                    restaurantid:
+                      description: The restaurant Id
+                      type: integer
+                      example: 923
+                    rating:
+                      description: The ratings of orders 
+                      type: number
+                      example: 4.2
+                    profit:
+                      description: The total profit 
+                      type: number
+                      example: 1001.49
+
+    rawRewardData:
+      description: A JSON object containing raw data for customer reward data for a day
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              date:
+                type: string
+                example: '01-01-2020'
+                description: The date of the raw data
+              rewardList:
+                type: array
+                description: An array of reward data objects
+                items:
+                  type: object
+                  properties:
+                    userid:
+                      description: The user id 
+                      type: integer
+                      example: 922
+                    rewardPoints:
+                      description: The reward points for that user
+                      type: integer
+                      example: 1983
+
+  responses:
+    Error:
+      description: unexpected request
+      content:
+        application/json:
+          schema:
+            type: object
+            description: Returns a error code and a error message
+            required:
+              - code
+              - message
+            properties:
+              code:
+                description: The error code
+                type: integer
+                example: 400
+              message:
+                type: string
+                description: The error message
+                example: "Request body not formatted correctly"
+
+    200SuccessMessage:
+      description: sucess message
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                description: message on success 
+                type: string
+                example: successfully post raw data

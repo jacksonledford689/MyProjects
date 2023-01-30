@@ -1,0 +1,3549 @@
+{
+	"info": {
+		"_postman_id": "90f3089a-a074-429f-a440-6c58afdabfab",
+		"name": "Report API Documentation",
+		"description": "This API handles all requests for reports for different business aspects, such as sales, restaurants, drivers, etc. It allows for general summary reports or some individualized reports for restaurants and drivers.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "reports",
+			"item": [
+				{
+					"name": "sales",
+					"item": [
+						{
+							"name": "/reports/sales",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/reports/sales?timeframe=day&startdate=01-01-2022&enddate=12-31-2022",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reports",
+										"sales"
+									],
+									"query": [
+										{
+											"key": "timeframe",
+											"value": "day",
+											"description": "set the timeframe for the report (day, week, month, year)"
+										},
+										{
+											"key": "startdate",
+											"value": "01-01-2022",
+											"description": "set the start date when the report begins"
+										},
+										{
+											"key": "enddate",
+											"value": "12-31-2022",
+											"description": "set the end date when the report ends"
+										}
+									]
+								},
+								"description": "Retrieve a sales report which includes information such as total profit, total revenue, number of sales, etc. This can be filtered by a timeframe or a start date and end date."
+							},
+							"response": [
+								{
+									"name": "Successfully return a sales report",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/sales?timeframe=day&startdate=01-01-2022&enddate=12-31-2022",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"sales"
+											],
+											"query": [
+												{
+													"key": "timeframe",
+													"value": "day"
+												},
+												{
+													"key": "startdate",
+													"value": "01-01-2022"
+												},
+												{
+													"key": "enddate",
+													"value": "12-31-2022"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"startDate\": \"03-06-2022\",\n  \"endDate\": \"03-07-2022\",\n  \"totalProfit\": 12345678.9,\n  \"totalRestaurantProfit\": 12345678.9,\n  \"totalDriverProfit\": 12345678.9,\n  \"revenue\": 12345678.9,\n  \"salesCount\": 123456789,\n  \"newAccountCount\": 123456789\n}"
+								},
+								{
+									"name": "Invalid request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/sales?timeframe=day&startdate=01-01-2022&enddate=12-31-2022",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"sales"
+											],
+											"query": [
+												{
+													"key": "timeframe",
+													"value": "day"
+												},
+												{
+													"key": "startdate",
+													"value": "01-01-2022"
+												},
+												{
+													"key": "enddate",
+													"value": "12-31-2022"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"invalid request\"\n}"
+								}
+							]
+						},
+						{
+							"name": "/reports/sales",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/reports/sales",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reports",
+										"sales"
+									]
+								},
+								"description": "let other services post raw sales data in batches"
+							},
+							"response": [
+								{
+									"name": "sucess message",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/sales",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"sales"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"successfully post raw data\"\n}"
+								},
+								{
+									"name": "Invalid request",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/sales",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"sales"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"invalid request\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "abandoned-carts",
+					"item": [
+						{
+							"name": "/reports/abandoned-carts",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/reports/abandoned-carts?timeframe=day&startdate=01-01-2022&enddate=12-31-2022",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reports",
+										"abandoned-carts"
+									],
+									"query": [
+										{
+											"key": "timeframe",
+											"value": "day",
+											"description": "set the timeframe for the report (day, week, month, year)"
+										},
+										{
+											"key": "startdate",
+											"value": "01-01-2022",
+											"description": "set the start date when the report begins"
+										},
+										{
+											"key": "enddate",
+											"value": "12-31-2022",
+											"description": "set the end date when the report ends"
+										}
+									]
+								},
+								"description": "Retrieve an abandoned carts report for a user which includes information such as total count(of abandoned carts), id of the restaurant with the most abandoned carts, a list of commonly abandoned items, etc. This can be filtered by a timeframe or a start date and end date."
+							},
+							"response": [
+								{
+									"name": "Successfully return a sales report for a user",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/abandoned-carts?timeframe=day&startdate=01-01-2022&enddate=12-31-2022",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"abandoned-carts"
+											],
+											"query": [
+												{
+													"key": "timeframe",
+													"value": "day"
+												},
+												{
+													"key": "startdate",
+													"value": "01-01-2022"
+												},
+												{
+													"key": "enddate",
+													"value": "12-31-2022"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"startDate\": \"03-06-2022\",\n  \"endDate\": \"03-07-2022\",\n  \"cartCount\": 12345,\n  \"restaurantID\": 5,\n  \"userID\": 99,\n  \"cartValueTotal\": 123.34,\n  \"restLeastAbandCarts\": 5,\n  \"restMostAbandCarts\": 9,\n  \"commonAbandonedItems\": [\n    1,\n    2,\n    3,\n    4\n  ]\n}"
+								},
+								{
+									"name": "Invalid request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/abandoned-carts?timeframe=day&startdate=01-01-2022&enddate=12-31-2022",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"abandoned-carts"
+											],
+											"query": [
+												{
+													"key": "timeframe",
+													"value": "day"
+												},
+												{
+													"key": "startdate",
+													"value": "01-01-2022"
+												},
+												{
+													"key": "enddate",
+													"value": "12-31-2022"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"invalid request\"\n}"
+								}
+							]
+						},
+						{
+							"name": "/reports/abandoned-carts",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/reports/abandoned-carts",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reports",
+										"abandoned-carts"
+									]
+								},
+								"description": "let other services post raw sales data in batches"
+							},
+							"response": [
+								{
+									"name": "sucess message",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/abandoned-carts",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"abandoned-carts"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"successfully post raw data\"\n}"
+								},
+								{
+									"name": "Invalid request",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/abandoned-carts",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"abandoned-carts"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"invalid request\"\n}"
+								}
+							]
+						},
+						{
+							"name": "/reports/abandoned-carts/users/:userid",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json:"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/reports/abandoned-carts/users/:userid?timeframe=day&startdate=01-01-2022&enddate=12-31-2022",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reports",
+										"abandoned-carts",
+										"users",
+										":userid"
+									],
+									"query": [
+										{
+											"key": "timeframe",
+											"value": "day",
+											"description": "set the timeframe for the report (day, week, month, year)"
+										},
+										{
+											"key": "startdate",
+											"value": "01-01-2022",
+											"description": "set the start date when the report begins"
+										},
+										{
+											"key": "enddate",
+											"value": "12-31-2022",
+											"description": "set the end date when the report ends"
+										}
+									],
+									"variable": [
+										{
+											"key": "userid",
+											"value": "66820153",
+											"description": "(Required) The user ID"
+										}
+									]
+								},
+								"description": "Retrieve an abandoned carts report for a user which includes all previous information, but narrowed down to a specific user. This can be filtered by a timeframe, a start date and end date, and/or a user id."
+							},
+							"response": [
+								{
+									"name": "Successfully return a sales report for a restaurant",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/abandoned-carts/users/:userid?timeframe=day&startdate=01-01-2022&enddate=12-31-2022",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"abandoned-carts",
+												"users",
+												":userid"
+											],
+											"query": [
+												{
+													"key": "timeframe",
+													"value": "day"
+												},
+												{
+													"key": "startdate",
+													"value": "01-01-2022"
+												},
+												{
+													"key": "enddate",
+													"value": "12-31-2022"
+												}
+											],
+											"variable": [
+												{
+													"key": "userid",
+													"value": "66820153",
+													"description": "(Required) The user ID"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json:"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Invalid request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/abandoned-carts/users/:userid?timeframe=day&startdate=01-01-2022&enddate=12-31-2022",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"abandoned-carts",
+												"users",
+												":userid"
+											],
+											"query": [
+												{
+													"key": "timeframe",
+													"value": "day"
+												},
+												{
+													"key": "startdate",
+													"value": "01-01-2022"
+												},
+												{
+													"key": "enddate",
+													"value": "12-31-2022"
+												}
+											],
+											"variable": [
+												{
+													"key": "userid",
+													"value": "66820153",
+													"description": "(Required) The user ID"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"invalid request\"\n}"
+								}
+							]
+						},
+						{
+							"name": "/reports/abandoned-carts/restaurants/:restaurantid",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json:"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/reports/abandoned-carts/restaurants/:restaurantid?timeframe=day&startdate=01-01-2022&enddate=12-31-2022",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reports",
+										"abandoned-carts",
+										"restaurants",
+										":restaurantid"
+									],
+									"query": [
+										{
+											"key": "timeframe",
+											"value": "day",
+											"description": "set the timeframe for the report (day, week, month, year)"
+										},
+										{
+											"key": "startdate",
+											"value": "01-01-2022",
+											"description": "set the start date when the report begins"
+										},
+										{
+											"key": "enddate",
+											"value": "12-31-2022",
+											"description": "set the end date when the report ends"
+										}
+									],
+									"variable": [
+										{
+											"key": "restaurantid",
+											"value": "66820153",
+											"description": "(Required) The restaurant ID"
+										}
+									]
+								},
+								"description": "Retrieve an abandoned carts report for a restaurant which includes all previous information, but narrowed down to a specifc restaurant. This can be filtered by a timeframe, a start date and end date, and/or a restaurant id."
+							},
+							"response": [
+								{
+									"name": "Successfully return a sales report for a restaurant",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/abandoned-carts/restaurants/:restaurantid?timeframe=day&startdate=01-01-2022&enddate=12-31-2022",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"abandoned-carts",
+												"restaurants",
+												":restaurantid"
+											],
+											"query": [
+												{
+													"key": "timeframe",
+													"value": "day"
+												},
+												{
+													"key": "startdate",
+													"value": "01-01-2022"
+												},
+												{
+													"key": "enddate",
+													"value": "12-31-2022"
+												}
+											],
+											"variable": [
+												{
+													"key": "restaurantid",
+													"value": "66820153",
+													"description": "(Required) The restaurant ID"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json:"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Invalid request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/abandoned-carts/restaurants/:restaurantid?timeframe=day&startdate=01-01-2022&enddate=12-31-2022",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"abandoned-carts",
+												"restaurants",
+												":restaurantid"
+											],
+											"query": [
+												{
+													"key": "timeframe",
+													"value": "day"
+												},
+												{
+													"key": "startdate",
+													"value": "01-01-2022"
+												},
+												{
+													"key": "enddate",
+													"value": "12-31-2022"
+												}
+											],
+											"variable": [
+												{
+													"key": "restaurantid",
+													"value": "66820153",
+													"description": "(Required) The restaurant ID"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"invalid request\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "transactions",
+					"item": [
+						{
+							"name": "/reports/transactions",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/reports/transactions?timeframe=day&startdate=01-01-2022&enddate=12-31-2022",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reports",
+										"transactions"
+									],
+									"query": [
+										{
+											"key": "timeframe",
+											"value": "day",
+											"description": "set the timeframe for the report (day, week, month, year)"
+										},
+										{
+											"key": "startdate",
+											"value": "01-01-2022",
+											"description": "set the start date when the report begins"
+										},
+										{
+											"key": "enddate",
+											"value": "12-31-2022",
+											"description": "set the end date when the report ends"
+										}
+									]
+								},
+								"description": "Retrieve a transaction report which includes information such as the amount of money in pending/posted/declined transactions along with the actual number of pending/posted transactions. This can be filtered by a timeframe or a start date and end date."
+							},
+							"response": [
+								{
+									"name": "Successfully return a transaction report",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/transactions?timeframe=day&startdate=01-01-2022&enddate=12-31-2022",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"transactions"
+											],
+											"query": [
+												{
+													"key": "timeframe",
+													"value": "day"
+												},
+												{
+													"key": "startdate",
+													"value": "01-01-2022"
+												},
+												{
+													"key": "enddate",
+													"value": "12-31-2022"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"startDate\": \"01-01-2022\",\n  \"endDate\": \"12-12-2022\",\n  \"totalAmountPending\": 7823.42,\n  \"totalAmountDeclined\": 9232423.4,\n  \"totalAmountPosted\": 89982983,\n  \"pendingPyamentCount\": 98,\n  \"postedPaymentCount\": 67\n}"
+								},
+								{
+									"name": "Invalid request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/transactions?timeframe=day&startdate=01-01-2022&enddate=12-31-2022",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"transactions"
+											],
+											"query": [
+												{
+													"key": "timeframe",
+													"value": "day"
+												},
+												{
+													"key": "startdate",
+													"value": "01-01-2022"
+												},
+												{
+													"key": "enddate",
+													"value": "12-31-2022"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"invalid request\"\n}"
+								}
+							]
+						},
+						{
+							"name": "/reports/transactions",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/reports/transactions",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reports",
+										"transactions"
+									]
+								},
+								"description": "Let other services post raw transaction data in batches"
+							},
+							"response": [
+								{
+									"name": "sucess message",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/transactions",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"transactions"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"successfully post raw data\"\n}"
+								},
+								{
+									"name": "Invalid request",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/transactions",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"transactions"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"invalid request\"\n}"
+								}
+							]
+						},
+						{
+							"name": "/reports/transactions/users/:userid",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/reports/transactions/users/:userid?timeframe=day&startdate=01-01-2022&enddate=12-31-2022",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reports",
+										"transactions",
+										"users",
+										":userid"
+									],
+									"query": [
+										{
+											"key": "timeframe",
+											"value": "day",
+											"description": "set the timeframe for the report (day, week, month, year)"
+										},
+										{
+											"key": "startdate",
+											"value": "01-01-2022",
+											"description": "set the start date when the report begins"
+										},
+										{
+											"key": "enddate",
+											"value": "12-31-2022",
+											"description": "set the end date when the report ends"
+										}
+									],
+									"variable": [
+										{
+											"key": "userid",
+											"value": "66820153",
+											"description": "(Required) The user ID"
+										}
+									]
+								},
+								"description": "Retrieve a transaction report for a user which includes all previous information, but narrowed down to a specific user. This can be filtered by a timeframe, a start date and end date, and/or a user id."
+							},
+							"response": [
+								{
+									"name": "Successfully return a transaction report for user",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/transactions/users/:userid?timeframe=day&startdate=01-01-2022&enddate=12-31-2022",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"transactions",
+												"users",
+												":userid"
+											],
+											"query": [
+												{
+													"key": "timeframe",
+													"value": "day"
+												},
+												{
+													"key": "startdate",
+													"value": "01-01-2022"
+												},
+												{
+													"key": "enddate",
+													"value": "12-31-2022"
+												}
+											],
+											"variable": [
+												{
+													"key": "userid",
+													"value": "66820153",
+													"description": "(Required) The user ID"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"startDate\": \"01-01-2022\",\n  \"endDate\": \"12-12-2022\",\n  \"totalAmountPending\": 7823.42,\n  \"totalAmountDeclined\": 9232423.4,\n  \"totalAmountPosted\": 89982983,\n  \"pendingPyamentCount\": 98,\n  \"postedPaymentCount\": 67\n}"
+								},
+								{
+									"name": "Invalid request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/transactions/users/:userid?timeframe=day&startdate=01-01-2022&enddate=12-31-2022",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"transactions",
+												"users",
+												":userid"
+											],
+											"query": [
+												{
+													"key": "timeframe",
+													"value": "day"
+												},
+												{
+													"key": "startdate",
+													"value": "01-01-2022"
+												},
+												{
+													"key": "enddate",
+													"value": "12-31-2022"
+												}
+											],
+											"variable": [
+												{
+													"key": "userid",
+													"value": "66820153",
+													"description": "(Required) The user ID"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"invalid request\"\n}"
+								}
+							]
+						},
+						{
+							"name": "/reports/transactions/restaurants/:restaurantid",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/reports/transactions/restaurants/:restaurantid?timeframe=day&startdate=01-01-2022&enddate=12-31-2022",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reports",
+										"transactions",
+										"restaurants",
+										":restaurantid"
+									],
+									"query": [
+										{
+											"key": "timeframe",
+											"value": "day",
+											"description": "set the timeframe for the report (day, week, month, year)"
+										},
+										{
+											"key": "startdate",
+											"value": "01-01-2022",
+											"description": "set the start date when the report begins"
+										},
+										{
+											"key": "enddate",
+											"value": "12-31-2022",
+											"description": "set the end date when the report ends"
+										}
+									],
+									"variable": [
+										{
+											"key": "restaurantid",
+											"value": "66820153",
+											"description": "(Required) The restaurant ID"
+										}
+									]
+								},
+								"description": "Retrieve a transaction report for a user which includes all previous information, but narrowed down to a specific user. This can be filtered by a timeframe, a start date and end date, and/or a restaurant id."
+							},
+							"response": [
+								{
+									"name": "Successfully return a transaction report for restaurant",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/transactions/restaurants/:restaurantid?timeframe=day&startdate=01-01-2022&enddate=12-31-2022",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"transactions",
+												"restaurants",
+												":restaurantid"
+											],
+											"query": [
+												{
+													"key": "timeframe",
+													"value": "day"
+												},
+												{
+													"key": "startdate",
+													"value": "01-01-2022"
+												},
+												{
+													"key": "enddate",
+													"value": "12-31-2022"
+												}
+											],
+											"variable": [
+												{
+													"key": "restaurantid",
+													"value": "66820153",
+													"description": "(Required) The restaurant ID"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"startDate\": \"01-01-2022\",\n  \"endDate\": \"12-12-2022\",\n  \"totalAmountPending\": 7823.42,\n  \"totalAmountDeclined\": 9232423.4,\n  \"totalAmountPosted\": 89982983,\n  \"pendingPyamentCount\": 98,\n  \"postedPaymentCount\": 67\n}"
+								},
+								{
+									"name": "Invalid request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/transactions/restaurants/:restaurantid?timeframe=day&startdate=01-01-2022&enddate=12-31-2022",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"transactions",
+												"restaurants",
+												":restaurantid"
+											],
+											"query": [
+												{
+													"key": "timeframe",
+													"value": "day"
+												},
+												{
+													"key": "startdate",
+													"value": "01-01-2022"
+												},
+												{
+													"key": "enddate",
+													"value": "12-31-2022"
+												}
+											],
+											"variable": [
+												{
+													"key": "restaurantid",
+													"value": "66820153",
+													"description": "(Required) The restaurant ID"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"invalid request\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "drivers",
+					"item": [
+						{
+							"name": "/reports/drivers",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/reports/drivers?timeframe=day&startdate=01-01-2022&enddate=12-31-2022",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reports",
+										"drivers"
+									],
+									"query": [
+										{
+											"key": "timeframe",
+											"value": "day",
+											"description": "set the timeframe for the report (day, week, month, year)"
+										},
+										{
+											"key": "startdate",
+											"value": "01-01-2022",
+											"description": "set the start date when the report begins"
+										},
+										{
+											"key": "enddate",
+											"value": "12-31-2022",
+											"description": "set the end date when the report ends"
+										}
+									]
+								},
+								"description": "Retrieve a driver activity report which includes total deliveries completed, total deliveries canceled, total tips, etc. This can be filtered by a timeframe or a start date and end date."
+							},
+							"response": [
+								{
+									"name": "Successfully return driver report",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/drivers?timeframe=day&startdate=01-01-2022&enddate=12-31-2022",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"drivers"
+											],
+											"query": [
+												{
+													"key": "timeframe",
+													"value": "day"
+												},
+												{
+													"key": "startdate",
+													"value": "01-01-2022"
+												},
+												{
+													"key": "enddate",
+													"value": "12-31-2022"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"startDate\": \"01-01-2022\",\n  \"endDate\": \"12-31-2023\",\n  \"countDeliveriesComplete\": 789,\n  \"countDeliveriesCancelled\": 94,\n  \"tipTotal\": 8.76,\n  \"driverID\": 87,\n  \"averageDeliveryRating\": 3.4,\n  \"averageDeliveryTime\": 15.7\n}"
+								},
+								{
+									"name": "Invalid request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/drivers?timeframe=day&startdate=01-01-2022&enddate=12-31-2022",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"drivers"
+											],
+											"query": [
+												{
+													"key": "timeframe",
+													"value": "day"
+												},
+												{
+													"key": "startdate",
+													"value": "01-01-2022"
+												},
+												{
+													"key": "enddate",
+													"value": "12-31-2022"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"invalid request\"\n}"
+								}
+							]
+						},
+						{
+							"name": "/reports/drivers",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/reports/drivers",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reports",
+										"drivers"
+									]
+								},
+								"description": "Let other services post raw driver data in batches"
+							},
+							"response": [
+								{
+									"name": "sucess message",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/drivers",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"drivers"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"successfully post raw data\"\n}"
+								},
+								{
+									"name": "Invalid request",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/drivers",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"drivers"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"invalid request\"\n}"
+								}
+							]
+						},
+						{
+							"name": "/reports/drivers/:driverid",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/reports/drivers/:driverid?startdate=01-01-2022&enddate=12-31-2022&timeframe=day",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reports",
+										"drivers",
+										":driverid"
+									],
+									"query": [
+										{
+											"key": "startdate",
+											"value": "01-01-2022",
+											"description": "set the start date when the report begins"
+										},
+										{
+											"key": "enddate",
+											"value": "12-31-2022",
+											"description": "set the end date when the report ends"
+										},
+										{
+											"key": "timeframe",
+											"value": "day",
+											"description": "set the timeframe for the report (day, week, month, year)"
+										}
+									],
+									"variable": [
+										{
+											"key": "driverid",
+											"value": "66820153",
+											"description": "(Required) The driver ID"
+										}
+									]
+								},
+								"description": "Retrieve a driver activity report which includes all previous information, but narrowed down to a specific driver. This can be filtered by a timeframe, a start date and end date, and/or a driver id."
+							},
+							"response": [
+								{
+									"name": "Successfully return driver report",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/drivers/:driverid?startdate=01-01-2022&enddate=12-31-2022&timeframe=day",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"drivers",
+												":driverid"
+											],
+											"query": [
+												{
+													"key": "startdate",
+													"value": "01-01-2022"
+												},
+												{
+													"key": "enddate",
+													"value": "12-31-2022"
+												},
+												{
+													"key": "timeframe",
+													"value": "day"
+												}
+											],
+											"variable": [
+												{
+													"key": "driverid",
+													"value": "66820153",
+													"description": "(Required) The driver ID"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"startDate\": \"01-01-2022\",\n  \"endDate\": \"12-31-2023\",\n  \"countDeliveriesComplete\": 789,\n  \"countDeliveriesCancelled\": 94,\n  \"tipTotal\": 8.76,\n  \"driverID\": 87,\n  \"averageDeliveryRating\": 3.4,\n  \"averageDeliveryTime\": 15.7\n}"
+								},
+								{
+									"name": "Invalid request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/drivers/:driverid?startdate=01-01-2022&enddate=12-31-2022&timeframe=day",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"drivers",
+												":driverid"
+											],
+											"query": [
+												{
+													"key": "startdate",
+													"value": "01-01-2022"
+												},
+												{
+													"key": "enddate",
+													"value": "12-31-2022"
+												},
+												{
+													"key": "timeframe",
+													"value": "day"
+												}
+											],
+											"variable": [
+												{
+													"key": "driverid",
+													"value": "66820153",
+													"description": "(Required) The driver ID"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"invalid request\"\n}"
+								}
+							]
+						},
+						{
+							"name": "/reports/drivers/top",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/reports/drivers/top?timeframe=day&startdate=01-01-2022&enddate=12-31-2022&metric=profit",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reports",
+										"drivers",
+										"top"
+									],
+									"query": [
+										{
+											"key": "timeframe",
+											"value": "day",
+											"description": "set the timeframe for the report (day, week, month, year)"
+										},
+										{
+											"key": "startdate",
+											"value": "01-01-2022",
+											"description": "set the start date when the report begins"
+										},
+										{
+											"key": "enddate",
+											"value": "12-31-2022",
+											"description": "set the end date when the report ends"
+										},
+										{
+											"key": "metric",
+											"value": "profit",
+											"description": "Set the metric to sort report by (profit, number of orders, tips)"
+										}
+									]
+								},
+								"description": "Retrieve a driver activity report which includes all previous information, but narrowed down to the top driver of a given metric. This can be filtered by a timeframe, a start date and end date, and/or a metric. Given no metric, shows top driver for each metric."
+							},
+							"response": [
+								{
+									"name": "Successfully return driver report for the top driver",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/drivers/top?timeframe=day&startdate=01-01-2022&enddate=12-31-2022&metric=profit",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"drivers",
+												"top"
+											],
+											"query": [
+												{
+													"key": "timeframe",
+													"value": "day"
+												},
+												{
+													"key": "startdate",
+													"value": "01-01-2022"
+												},
+												{
+													"key": "enddate",
+													"value": "12-31-2022"
+												},
+												{
+													"key": "metric",
+													"value": "profit"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"startDate\": \"01-01-2022\",\n  \"endDate\": \"12-31-2023\",\n  \"countDeliveriesComplete\": 789,\n  \"countDeliveriesCancelled\": 94,\n  \"tipTotal\": 8.76,\n  \"driverID\": 87,\n  \"averageDeliveryRating\": 3.4,\n  \"averageDeliveryTime\": 15.7\n}"
+								},
+								{
+									"name": "Invalid request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/drivers/top?timeframe=day&startdate=01-01-2022&enddate=12-31-2022&metric=profit",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"drivers",
+												"top"
+											],
+											"query": [
+												{
+													"key": "timeframe",
+													"value": "day"
+												},
+												{
+													"key": "startdate",
+													"value": "01-01-2022"
+												},
+												{
+													"key": "enddate",
+													"value": "12-31-2022"
+												},
+												{
+													"key": "metric",
+													"value": "profit"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"invalid request\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "customer-service",
+					"item": [
+						{
+							"name": "/reports/customer-service",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/reports/customer-service?timeframe=day&startdate=01-01-2022&enddate=12-31-2022",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reports",
+										"customer-service"
+									],
+									"query": [
+										{
+											"key": "timeframe",
+											"value": "day",
+											"description": "set the timeframe for the report (day, week, month, year)"
+										},
+										{
+											"key": "startdate",
+											"value": "01-01-2022",
+											"description": "set the start date when the report begins"
+										},
+										{
+											"key": "enddate",
+											"value": "12-31-2022",
+											"description": "set the end date when the report ends"
+										}
+									]
+								},
+								"description": "Retrieve a report on customer service tickets which includes total number of resolved/unresolved tickets, ticket to order ratio, restaurants/drivers with the most/least tickets, etc. This can be filtered by a timeframe or a start date and end date."
+							},
+							"response": [
+								{
+									"name": "Successfully return a customer service report",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/customer-service?timeframe=day&startdate=01-01-2022&enddate=12-31-2022",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"customer-service"
+											],
+											"query": [
+												{
+													"key": "timeframe",
+													"value": "day"
+												},
+												{
+													"key": "startdate",
+													"value": "01-01-2022"
+												},
+												{
+													"key": "enddate",
+													"value": "12-31-2022"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"startDate\": \"01-01-2022\",\n  \"endDate\": \"12-12-2022\",\n  \"totalResolvedTickets\": 8923,\n  \"totalUnresolvedTickets\": 283,\n  \"restaurantsMostTickets\": [\n    1,\n    2,\n    3,\n    4,\n    5\n  ],\n  \"restaurantsLeastTickets\": [\n    1,\n    2,\n    3,\n    4,\n    5\n  ],\n  \"totalTicketsOrderRatio\": 0.01,\n  \"driverMostTickets\": 9,\n  \"driverLeastTickets\": 99,\n  \"highestOpenTicketRestaurant\": 23\n}"
+								},
+								{
+									"name": "Invalid request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/customer-service?timeframe=day&startdate=01-01-2022&enddate=12-31-2022",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"customer-service"
+											],
+											"query": [
+												{
+													"key": "timeframe",
+													"value": "day"
+												},
+												{
+													"key": "startdate",
+													"value": "01-01-2022"
+												},
+												{
+													"key": "enddate",
+													"value": "12-31-2022"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"invalid request\"\n}"
+								}
+							]
+						},
+						{
+							"name": "/reports/customer-service",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/reports/customer-service",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reports",
+										"customer-service"
+									]
+								},
+								"description": "let other services post raw sales data in batches"
+							},
+							"response": [
+								{
+									"name": "sucess message",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/customer-service",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"customer-service"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"successfully post raw data\"\n}"
+								},
+								{
+									"name": "Invalid request",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/customer-service",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"customer-service"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"invalid request\"\n}"
+								}
+							]
+						},
+						{
+							"name": "/reports/customer-service/users/:userid",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/reports/customer-service/users/:userid?timeframe=day&startdate=01-01-2022&enddate=12-31-2022",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reports",
+										"customer-service",
+										"users",
+										":userid"
+									],
+									"query": [
+										{
+											"key": "timeframe",
+											"value": "day",
+											"description": "set the timeframe for the report (day, week, month, year)"
+										},
+										{
+											"key": "startdate",
+											"value": "01-01-2022",
+											"description": "set the start date when the report begins"
+										},
+										{
+											"key": "enddate",
+											"value": "12-31-2022",
+											"description": "set the end date when the report ends"
+										}
+									],
+									"variable": [
+										{
+											"key": "userid",
+											"value": "66820153",
+											"description": "(Required) The user ID"
+										}
+									]
+								},
+								"description": "Retrieve a report on customer service tickets which includes all previous information, but narrowed down to a specific user. This can be filtered by a timeframe, a start date and end date, and/or a user id."
+							},
+							"response": [
+								{
+									"name": "Successfully return a customer service report for a specific user",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/customer-service/users/:userid?timeframe=day&startdate=01-01-2022&enddate=12-31-2022",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"customer-service",
+												"users",
+												":userid"
+											],
+											"query": [
+												{
+													"key": "timeframe",
+													"value": "day"
+												},
+												{
+													"key": "startdate",
+													"value": "01-01-2022"
+												},
+												{
+													"key": "enddate",
+													"value": "12-31-2022"
+												}
+											],
+											"variable": [
+												{
+													"key": "userid",
+													"value": "66820153",
+													"description": "(Required) The user ID"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"startDate\": \"01-01-2022\",\n  \"endDate\": \"12-12-2022\",\n  \"totalResolvedTickets\": 8923,\n  \"totalUnresolvedTickets\": 283,\n  \"restaurantsMostTickets\": [\n    1,\n    2,\n    3,\n    4,\n    5\n  ],\n  \"restaurantsLeastTickets\": [\n    1,\n    2,\n    3,\n    4,\n    5\n  ],\n  \"totalTicketsOrderRatio\": 0.01,\n  \"driverMostTickets\": 9,\n  \"driverLeastTickets\": 99,\n  \"highestOpenTicketRestaurant\": 23\n}"
+								},
+								{
+									"name": "Invalid request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/customer-service/users/:userid?timeframe=day&startdate=01-01-2022&enddate=12-31-2022",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"customer-service",
+												"users",
+												":userid"
+											],
+											"query": [
+												{
+													"key": "timeframe",
+													"value": "day"
+												},
+												{
+													"key": "startdate",
+													"value": "01-01-2022"
+												},
+												{
+													"key": "enddate",
+													"value": "12-31-2022"
+												}
+											],
+											"variable": [
+												{
+													"key": "userid",
+													"value": "66820153",
+													"description": "(Required) The user ID"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"invalid request\"\n}"
+								}
+							]
+						},
+						{
+							"name": "/reports/customer-service/restaurants/:restaurantid",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/reports/customer-service/restaurants/:restaurantid?timeframe=day&startdate=01-01-2022&enddate=12-31-2022",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reports",
+										"customer-service",
+										"restaurants",
+										":restaurantid"
+									],
+									"query": [
+										{
+											"key": "timeframe",
+											"value": "day",
+											"description": "set the timeframe for the report (day, week, month, year)"
+										},
+										{
+											"key": "startdate",
+											"value": "01-01-2022",
+											"description": "set the start date when the report begins"
+										},
+										{
+											"key": "enddate",
+											"value": "12-31-2022",
+											"description": "set the end date when the report ends"
+										}
+									],
+									"variable": [
+										{
+											"key": "restaurantid",
+											"value": "66820153",
+											"description": "(Required) The restaurant ID"
+										}
+									]
+								},
+								"description": "Retrieve a report on customer service tickets which includes all previous information, but narrowed down to a specific restaurant. This can be filtered by a timeframe, a start date and end date, and/or a restaurant id."
+							},
+							"response": [
+								{
+									"name": "Successfully return a customer service report for a specific restaurant",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/customer-service/restaurants/:restaurantid?timeframe=day&startdate=01-01-2022&enddate=12-31-2022",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"customer-service",
+												"restaurants",
+												":restaurantid"
+											],
+											"query": [
+												{
+													"key": "timeframe",
+													"value": "day"
+												},
+												{
+													"key": "startdate",
+													"value": "01-01-2022"
+												},
+												{
+													"key": "enddate",
+													"value": "12-31-2022"
+												}
+											],
+											"variable": [
+												{
+													"key": "restaurantid",
+													"value": "66820153",
+													"description": "(Required) The restaurant ID"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"startDate\": \"01-01-2022\",\n  \"endDate\": \"12-12-2022\",\n  \"totalResolvedTickets\": 8923,\n  \"totalUnresolvedTickets\": 283,\n  \"restaurantsMostTickets\": [\n    1,\n    2,\n    3,\n    4,\n    5\n  ],\n  \"restaurantsLeastTickets\": [\n    1,\n    2,\n    3,\n    4,\n    5\n  ],\n  \"totalTicketsOrderRatio\": 0.01,\n  \"driverMostTickets\": 9,\n  \"driverLeastTickets\": 99,\n  \"highestOpenTicketRestaurant\": 23\n}"
+								},
+								{
+									"name": "Invalid request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/customer-service/restaurants/:restaurantid?timeframe=day&startdate=01-01-2022&enddate=12-31-2022",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"customer-service",
+												"restaurants",
+												":restaurantid"
+											],
+											"query": [
+												{
+													"key": "timeframe",
+													"value": "day"
+												},
+												{
+													"key": "startdate",
+													"value": "01-01-2022"
+												},
+												{
+													"key": "enddate",
+													"value": "12-31-2022"
+												}
+											],
+											"variable": [
+												{
+													"key": "restaurantid",
+													"value": "66820153",
+													"description": "(Required) The restaurant ID"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"invalid request\"\n}"
+								}
+							]
+						},
+						{
+							"name": "/reports/customer-service/driver/:driverid",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/reports/customer-service/driver/:driverid?timeframe=day&startdate=01-01-2022&enddate=12-31-2022",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reports",
+										"customer-service",
+										"driver",
+										":driverid"
+									],
+									"query": [
+										{
+											"key": "timeframe",
+											"value": "day",
+											"description": "set the timeframe for the report (day, week, month, year)"
+										},
+										{
+											"key": "startdate",
+											"value": "01-01-2022",
+											"description": "set the start date when the report begins"
+										},
+										{
+											"key": "enddate",
+											"value": "12-31-2022",
+											"description": "set the end date when the report ends"
+										}
+									],
+									"variable": [
+										{
+											"key": "driverid",
+											"value": "66820153",
+											"description": "(Required) The driver ID"
+										}
+									]
+								},
+								"description": "Retrieve a report on customer service tickets which includes all previous information, but narrowed down to a specific driver. This can be filtered by a timeframe, a start date and end date, and/or a driver id."
+							},
+							"response": [
+								{
+									"name": "Successfully return a customer service report for a specific driver",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/customer-service/driver/:driverid?timeframe=day&startdate=01-01-2022&enddate=12-31-2022",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"customer-service",
+												"driver",
+												":driverid"
+											],
+											"query": [
+												{
+													"key": "timeframe",
+													"value": "day"
+												},
+												{
+													"key": "startdate",
+													"value": "01-01-2022"
+												},
+												{
+													"key": "enddate",
+													"value": "12-31-2022"
+												}
+											],
+											"variable": [
+												{
+													"key": "driverid",
+													"value": "66820153",
+													"description": "(Required) The driver ID"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"startDate\": \"01-01-2022\",\n  \"endDate\": \"12-12-2022\",\n  \"totalResolvedTickets\": 8923,\n  \"totalUnresolvedTickets\": 283,\n  \"restaurantsMostTickets\": [\n    1,\n    2,\n    3,\n    4,\n    5\n  ],\n  \"restaurantsLeastTickets\": [\n    1,\n    2,\n    3,\n    4,\n    5\n  ],\n  \"totalTicketsOrderRatio\": 0.01,\n  \"driverMostTickets\": 9,\n  \"driverLeastTickets\": 99,\n  \"highestOpenTicketRestaurant\": 23\n}"
+								},
+								{
+									"name": "Invalid request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/customer-service/driver/:driverid?timeframe=day&startdate=01-01-2022&enddate=12-31-2022",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"customer-service",
+												"driver",
+												":driverid"
+											],
+											"query": [
+												{
+													"key": "timeframe",
+													"value": "day"
+												},
+												{
+													"key": "startdate",
+													"value": "01-01-2022"
+												},
+												{
+													"key": "enddate",
+													"value": "12-31-2022"
+												}
+											],
+											"variable": [
+												{
+													"key": "driverid",
+													"value": "66820153",
+													"description": "(Required) The driver ID"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"invalid request\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "restaurants",
+					"item": [
+						{
+							"name": "/reports/restaurants",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/reports/restaurants?timeframe=day&startdate=01-01-2022&enddate=12-31-2022",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reports",
+										"restaurants"
+									],
+									"query": [
+										{
+											"key": "timeframe",
+											"value": "day",
+											"description": "set the timeframe for the report (day, week, month, year)"
+										},
+										{
+											"key": "startdate",
+											"value": "01-01-2022",
+											"description": "set the start date when the report begins"
+										},
+										{
+											"key": "enddate",
+											"value": "12-31-2022",
+											"description": "set the end date when the report ends"
+										}
+									]
+								},
+								"description": "Retrieve a restaurant activity report which includes number of order, average time before pickup, profits, etc. This can be filtered by a timeframe or a start date and end date."
+							},
+							"response": [
+								{
+									"name": "Successfully return a restaurant activity report",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/restaurants?timeframe=day&startdate=01-01-2022&enddate=12-31-2022",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"restaurants"
+											],
+											"query": [
+												{
+													"key": "timeframe",
+													"value": "day"
+												},
+												{
+													"key": "startdate",
+													"value": "01-01-2022"
+												},
+												{
+													"key": "enddate",
+													"value": "12-31-2022"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"startDate\": \"01-01-2022\",\n  \"endDate\": \"12-12-2022\",\n  \"numOrders\": 9283928,\n  \"averageTimeToPickup\": 17.23,\n  \"profits\": 29839283,\n  \"highestOrderedItems\": [\n    1,\n    2,\n    3,\n    4,\n    5\n  ],\n  \"restaurantID\": 82,\n  \"averageRating\": 3.2,\n  \"totalSales\": 1231231\n}"
+								},
+								{
+									"name": "Invalid request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/restaurants?timeframe=day&startdate=01-01-2022&enddate=12-31-2022",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"restaurants"
+											],
+											"query": [
+												{
+													"key": "timeframe",
+													"value": "day"
+												},
+												{
+													"key": "startdate",
+													"value": "01-01-2022"
+												},
+												{
+													"key": "enddate",
+													"value": "12-31-2022"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"invalid request\"\n}"
+								}
+							]
+						},
+						{
+							"name": "/reports/restaurants",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/reports/restaurants",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reports",
+										"restaurants"
+									]
+								},
+								"description": "Let other services post raw restaurant activity data in batches"
+							},
+							"response": [
+								{
+									"name": "sucess message",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/restaurants",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"restaurants"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"successfully post raw data\"\n}"
+								},
+								{
+									"name": "Invalid request",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/restaurants",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"restaurants"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"invalid request\"\n}"
+								}
+							]
+						},
+						{
+							"name": "/reports/restaurants/:restaurantid",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/reports/restaurants/:restaurantid?timeframe=day&startdate=01-01-2022&enddate=12-31-2022",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reports",
+										"restaurants",
+										":restaurantid"
+									],
+									"query": [
+										{
+											"key": "timeframe",
+											"value": "day",
+											"description": "set the timeframe for the report (day, week, month, year)"
+										},
+										{
+											"key": "startdate",
+											"value": "01-01-2022",
+											"description": "set the start date when the report begins"
+										},
+										{
+											"key": "enddate",
+											"value": "12-31-2022",
+											"description": "set the end date when the report ends"
+										}
+									],
+									"variable": [
+										{
+											"key": "restaurantid",
+											"value": "66820153",
+											"description": "(Required) The restaurant ID"
+										}
+									]
+								},
+								"description": "Retrieve a restaurant activity report which includes all previous information, but narrowed down to a specific restaurant. This can be filtered by a timeframe, a start date and end date, and/or a restaurant id."
+							},
+							"response": [
+								{
+									"name": "Successfully return a restaurant activity report",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/restaurants/:restaurantid?timeframe=day&startdate=01-01-2022&enddate=12-31-2022",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"restaurants",
+												":restaurantid"
+											],
+											"query": [
+												{
+													"key": "timeframe",
+													"value": "day"
+												},
+												{
+													"key": "startdate",
+													"value": "01-01-2022"
+												},
+												{
+													"key": "enddate",
+													"value": "12-31-2022"
+												}
+											],
+											"variable": [
+												{
+													"key": "restaurantid",
+													"value": "66820153",
+													"description": "(Required) The restaurant ID"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"startDate\": \"01-01-2022\",\n  \"endDate\": \"12-12-2022\",\n  \"numOrders\": 9283928,\n  \"averageTimeToPickup\": 17.23,\n  \"profits\": 29839283,\n  \"highestOrderedItems\": [\n    1,\n    2,\n    3,\n    4,\n    5\n  ],\n  \"restaurantID\": 82,\n  \"averageRating\": 3.2,\n  \"totalSales\": 1231231\n}"
+								},
+								{
+									"name": "Invalid request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/restaurants/:restaurantid?timeframe=day&startdate=01-01-2022&enddate=12-31-2022",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"restaurants",
+												":restaurantid"
+											],
+											"query": [
+												{
+													"key": "timeframe",
+													"value": "day"
+												},
+												{
+													"key": "startdate",
+													"value": "01-01-2022"
+												},
+												{
+													"key": "enddate",
+													"value": "12-31-2022"
+												}
+											],
+											"variable": [
+												{
+													"key": "restaurantid",
+													"value": "66820153",
+													"description": "(Required) The restaurant ID"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"invalid request\"\n}"
+								}
+							]
+						},
+						{
+							"name": "/reports/restaurants/top",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/reports/restaurants/top?timeframe=day&startdate=01-01-2022&enddate=12-31-2022&metric=profit",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reports",
+										"restaurants",
+										"top"
+									],
+									"query": [
+										{
+											"key": "timeframe",
+											"value": "day",
+											"description": "set the timeframe for the report (day, week, month, year)"
+										},
+										{
+											"key": "startdate",
+											"value": "01-01-2022",
+											"description": "set the start date when the report begins"
+										},
+										{
+											"key": "enddate",
+											"value": "12-31-2022",
+											"description": "set the end date when the report ends"
+										},
+										{
+											"key": "metric",
+											"value": "profit",
+											"description": "Set the metric to sort report by (profit, number of orders, tips)"
+										}
+									]
+								},
+								"description": "Retrieve restaurant activity reports which inclueds all previous information, but narrowed down to the top restaurant of a given metric. This can be filtered by a timeframe, a start date and end date, and/or a metric. Given no metric, shows top restaurant for each metric."
+							},
+							"response": [
+								{
+									"name": "Successfully return a restaurant activity report",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/restaurants/top?timeframe=day&startdate=01-01-2022&enddate=12-31-2022&metric=profit",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"restaurants",
+												"top"
+											],
+											"query": [
+												{
+													"key": "timeframe",
+													"value": "day"
+												},
+												{
+													"key": "startdate",
+													"value": "01-01-2022"
+												},
+												{
+													"key": "enddate",
+													"value": "12-31-2022"
+												},
+												{
+													"key": "metric",
+													"value": "profit"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"startDate\": \"01-01-2022\",\n  \"endDate\": \"12-12-2022\",\n  \"numOrders\": 9283928,\n  \"averageTimeToPickup\": 17.23,\n  \"profits\": 29839283,\n  \"highestOrderedItems\": [\n    1,\n    2,\n    3,\n    4,\n    5\n  ],\n  \"restaurantID\": 82,\n  \"averageRating\": 3.2,\n  \"totalSales\": 1231231\n}"
+								},
+								{
+									"name": "Invalid request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/restaurants/top?timeframe=day&startdate=01-01-2022&enddate=12-31-2022&metric=profit",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"restaurants",
+												"top"
+											],
+											"query": [
+												{
+													"key": "timeframe",
+													"value": "day"
+												},
+												{
+													"key": "startdate",
+													"value": "01-01-2022"
+												},
+												{
+													"key": "enddate",
+													"value": "12-31-2022"
+												},
+												{
+													"key": "metric",
+													"value": "profit"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"invalid request\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "rewards",
+					"item": [
+						{
+							"name": "/reports/rewards",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/reports/rewards",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reports",
+										"rewards"
+									]
+								},
+								"description": "let other services post raw user reward data in batches"
+							},
+							"response": [
+								{
+									"name": "sucess message",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/rewards",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"rewards"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"successfully post raw data\"\n}"
+								},
+								{
+									"name": "Invalid request",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/rewards",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"rewards"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"invalid request\"\n}"
+								}
+							]
+						},
+						{
+							"name": "/reports/rewards/users/:userid",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/reports/rewards/users/:userid",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"reports",
+										"rewards",
+										"users",
+										":userid"
+									],
+									"variable": [
+										{
+											"key": "userid",
+											"value": "66820153",
+											"description": "(Required) The user ID"
+										}
+									]
+								},
+								"description": "Retrieve a user reward report which includes total sales and the user id. This is filtered by a user id."
+							},
+							"response": [
+								{
+									"name": "Successfully return reward report",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/rewards/users/:userid",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"rewards",
+												"users",
+												":userid"
+											],
+											"variable": [
+												{
+													"key": "userid",
+													"value": "66820153",
+													"description": "(Required) The user ID"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"userID\": 9,\n  \"totalSales\": 982842.53\n}"
+								},
+								{
+									"name": "Invalid request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": "Added as a part of security scheme: basic",
+												"key": "Authorization",
+												"value": "Basic <credentials>"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/reports/rewards/users/:userid",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"reports",
+												"rewards",
+												"users",
+												":userid"
+											],
+											"variable": [
+												{
+													"key": "userid",
+													"value": "66820153",
+													"description": "(Required) The user ID"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"message\": \"invalid request\"\n}"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "username",
+				"value": "<Basic Auth Username>",
+				"type": "string"
+			},
+			{
+				"key": "password",
+				"value": "<Basic Auth Password>",
+				"type": "string"
+			}
+		]
+	},
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://tigerchow.com",
+			"type": "string"
+		}
+	]
+}
