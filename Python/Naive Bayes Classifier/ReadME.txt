@@ -1,0 +1,1 @@
+This code uses the Naive Bayes Classifier to determine whether or not a particular email is spam using the provided list of stop words and training/testing sets.

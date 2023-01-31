@@ -1,0 +1,2 @@
+This Program will generate 2 very large vectors and compute the dot product. It will do this on both the CPU and the GPU. 
+This code also compares the runtime of summing of the products on the CPU after the multiplication on the GPU vs summing on the GPU using atomicAdd.

@@ -1,0 +1,1 @@
+This Python program predicts which wine you are analyzing based on various characteristics in the wine.data file.
